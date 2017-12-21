@@ -1,10 +1,13 @@
 /* eslint-disable */
+const path = require('path')
 const webpack = require('webpack')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
-const ENV = process.env.NODE_ENV || 'development'
-const pkg = require('./package')
+const htmlPlugin = require('html-webpack-plugin')
+const workboxPlugin = require('workbox-webpack-plugin')
 
+const pkg = require('./package')
+const ENV = process.env.NODE_ENV || 'development'
 const DEV_PORT = 4444
 
 const hmrEntries = [
@@ -50,6 +53,16 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify(
         process.env.NODE_ENV || 'development'
       )
+    }),
+    new htmlPlugin({
+      template: 'src/index.html'
+    }),
+    new workboxPlugin({
+      globDirectory: 'public',
+      globPatterns: ['**/*.{html,js}'],
+      swDest: path.join('public', 'sw.js'),
+      clientsClaim: true,
+      skipWaiting: true
     })
   ].concat(
     ENV === 'production'
