@@ -23,8 +23,12 @@
       "src/**/*.test.js"
     ]
   },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -39,7 +43,7 @@
   },
   "devDependencies": {
     "@mizchi/ava-helper": "^0.1.2",
-    "ava": "^0.22.0",
+    "ava": "^0.24.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.2",
@@ -55,7 +59,7 @@
     "enzyme-to-json": "^3.1.1",
     "eslint": "^4.8.0",
     "eslint-config-prettier": "^2.6.0",
-    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard": "^11.0.0-beta.0",
     "eslint-plugin-flow": "^2.29.1",
     "eslint-plugin-flowtype": "^2.37.0",
     "eslint-plugin-import": "^2.7.0",
@@ -64,13 +68,13 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.4.0",
     "eslint-plugin-standard": "^3.0.1",
-    "flow-bin": "^0.60.1",
+    "flow-bin": "^0.61.0",
     "nyc": "^11.2.1",
     "prettier": "^1.7.3",
     "react-hot-loader": "^3.0.0-beta.7",
     "react-redux": "^5.0.6",
     "react-test-renderer": "^16.0.0",
-    "uglifyjs-webpack-plugin": "1.0.0-beta.2",
+    "uglifyjs-webpack-plugin": "1.1.4",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"
   }

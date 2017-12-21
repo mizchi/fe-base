@@ -2,12 +2,8 @@ parser: 'babel-eslint'
 plugins:
   - react
   - prettier
-  - flowtype
-  - standard
 extends:
-  - standard
   - plugin:react/recommended
-  - plugin:flowtype/recommended
   - plugin:import/errors
   - prettier
   - prettier/flowtype

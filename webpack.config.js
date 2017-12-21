@@ -1,14 +1,15 @@
 /* eslint-disable */
-// $ yarn add webpack babel-loader
 const webpack = require('webpack')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const ENV = process.env.NODE_ENV || 'development'
 const pkg = require('./package')
 
+const DEV_PORT = 4444
+
 const hmrEntries = [
   'react-hot-loader/patch',
-  'webpack-dev-server/client?http://localhost:3355',
+  `webpack-dev-server/client?http://localhost:${DEV_PORT}`,
   'webpack/hot/only-dev-server'
 ]
 
@@ -28,7 +29,7 @@ module.exports = {
   devServer: {
     contentBase: 'public/',
     historyApiFallback: true,
-    port: 3355
+    port: DEV_PORT
   },
   module: {
     rules: [
