@@ -1,4 +1,4 @@
-# Frontend boilerplate
+# fe-base
 
 @mizchi's frontend boilerplate
 
