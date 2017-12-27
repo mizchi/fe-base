@@ -51,3 +51,4 @@ jspm_packages
 # netlify
 public/*
 !public/_redirects
+.netlify
