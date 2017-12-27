@@ -66,15 +66,7 @@ module.exports = {
     })
   ].concat(
     ENV === 'production'
-      ? [
-          new UglifyJSPlugin({
-            parallel: {
-              cache: true,
-              workers: 2 // for e.g
-            }
-          }),
-          new CompressionPlugin()
-        ]
+      ? [new UglifyJSPlugin({}), new CompressionPlugin()]
       : []
   )
 }
