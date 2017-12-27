@@ -1,20 +1,20 @@
 /* @flow */
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import Foo from './routes/Foo'
-import Bar from './routes/Bar'
-import Home from './routes/Home'
+import Home from './pages/Home'
+import About from './pages/About'
+import Counter from './pages/Counter'
 import Header from './molecules/Header'
 
 export default function Routes() {
   return (
-    <main>
+    <Fragment>
       <Header />
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/foo" exact component={Foo} />
-        <Route path="/bar" exact component={Bar} />
+        <Route path="/about" exact component={About} />
+        <Route path="/counter" exact component={Counter} />
       </Switch>
-    </main>
+    </Fragment>
   )
 }

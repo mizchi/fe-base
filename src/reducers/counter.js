@@ -1,35 +1,31 @@
 /* @flow */
 
 // Constants
-export const LOAD = 'foo/load'
+export const INCREMENT = 'counter/increment'
 
 // Action Creators
-export async function load(): Promise<{
-  type: typeof LOAD,
-  payload: 1
-}> {
+export function increment() {
   return {
-    type: LOAD,
-    payload: 1
+    type: INCREMENT
   }
 }
 
 // Reducer
-export type Action = $ReturnType<typeof load>
+export type Action = $Call<typeof increment>
 
 export type State = {
-  fooProp: number
+  value: number
 }
 
 const initialState: State = {
-  fooProp: 0
+  value: 0
 }
 
 // Reducer
 export default (state: State = initialState, action: Action): State => {
   switch (action.type) {
-    case LOAD: {
-      return { ...state, fooProp: action.payload }
+    case INCREMENT: {
+      return { ...state, value: state.value + 1 }
     }
     default: {
       return state

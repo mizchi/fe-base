@@ -2,12 +2,10 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import createStore from '../store/create'
+import createStore from '../store/createSTore'
 import Routes from '../components/Routes'
 
-export type Props = {}
-
-export default function App(_props: Props) {
+export default function App() {
   const store = createStore()
   return (
     <Provider store={store}>

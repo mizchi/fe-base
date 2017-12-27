@@ -1,15 +1,11 @@
 /* @flow */
 import { combineReducers } from 'redux'
-import foo from './foo'
-import type { State as FooState, Action as FooAction } from './foo'
-import bar from './bar'
-import type { State as BarState, Action as BarAction } from './bar'
+import counter, { type Action as CounterAction } from './counter'
 
-export type Action = FooAction | BarAction
+export type Action = CounterAction
 
 export type State = {
-  foo: FooState,
-  bar: BarState
+  counter: $Call<typeof counter, void, any>
 }
 
-export default combineReducers({ foo, bar })
+export default combineReducers({ counter })
