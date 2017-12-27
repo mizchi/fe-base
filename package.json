@@ -12,7 +12,17 @@
     "build": "NODE_ENV=production webpack",
     "build:size": "NODE_ENV=production webpack --json | webpack-bundle-size-analyzer",
     "build:ci": "yarn lint && yarn test:cov && yarn build",
-    "deploy": "yarn build && netlify deploy"
+    "deploy": "yarn build && netlify deploy",
+    "test:jest": "NODE_ENV=test yarn jest",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "jest": {
+    "testRegex": "(/test/.*|\\.(test))\\.(js)$",
+    "testEnvironment": "node",
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!lodash-es)"
+    ]
   },
   "ava": {
     "babel": "inherit",
@@ -22,7 +32,7 @@
       "./test/setup"
     ],
     "files": [
-      "src/**/*.test.js"
+      "src/**/*.spec.js"
     ]
   },
   "prettier": {
@@ -43,9 +53,14 @@
   },
   "devDependencies": {
     "@mizchi/ava-helper": "^0.1.2",
+    "@storybook/addon-actions": "^3.3.1",
+    "@storybook/addon-links": "^3.3.1",
+    "@storybook/addon-storyshots": "^3.3.1",
+    "@storybook/react": "^3.3.1",
     "ava": "^0.24.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.1.2",
+    "babel-jest": "^22.0.4",
     "babel-loader": "^7.1.2",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -63,6 +78,7 @@
     "eslint-plugin-react": "^7.4.0",
     "flow-bin": "^0.61.0",
     "html-webpack-plugin": "^2.30.1",
+    "jest": "^22.0.4",
     "nyc": "^11.2.1",
     "prettier": "^1.7.3",
     "react-hot-loader": "^3.1.3",
