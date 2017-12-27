@@ -11,6 +11,7 @@
     "build:dev": "NODE_ENV=development webpack",
     "build": "NODE_ENV=production webpack",
     "build:size": "NODE_ENV=production webpack --json | webpack-bundle-size-analyzer",
+    "build:ci": "yarn lint && yarn test:cov && yarn build",
     "deploy": "yarn build && netlify deploy"
   },
   "ava": {
