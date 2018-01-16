@@ -1,11 +1,9 @@
-/* eslint-disable */
 const path = require('path')
 const webpack = require('webpack')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const htmlPlugin = require('html-webpack-plugin')
 const workboxPlugin = require('workbox-webpack-plugin')
-
 const pkg = require('./package')
 const ENV = process.env.NODE_ENV || 'development'
 const DEV_PORT = process.env.PORT || 4444
