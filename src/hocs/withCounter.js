@@ -19,7 +19,7 @@ const connector = connect(
   dispatch => ({ actions: bindActionCreators({ ...CounterActions }, dispatch) })
 )
 
-const enhancer: HOC<Props, OuterProps> = compose(
+const withCounter: HOC<Props, OuterProps> = compose(
   connector,
   pure,
   lifecycle({
@@ -29,4 +29,4 @@ const enhancer: HOC<Props, OuterProps> = compose(
   })
 )
 
-export default enhancer
+export default withCounter

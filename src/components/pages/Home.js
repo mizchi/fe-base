@@ -1,6 +1,7 @@
 /* @flow */
 import * as React from 'react'
+import Text from '../atoms/Text'
 
 export default function Home() {
-  return <h1>Hello!</h1>
+  return <Text>Hello!</Text>
 }

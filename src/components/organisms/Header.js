@@ -1,6 +1,7 @@
 /* @flow */
 import React from 'react'
+import Pane from '../atoms/Pane'
 
 export default function Header() {
-  return <header>header</header>
+  return <Pane>header</Pane>
 }

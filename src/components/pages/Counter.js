@@ -1,14 +1,13 @@
 /* @flow */
 import React from 'react'
-import enhancer from '../../enhancers/counterEnhancer'
-import Label from '../atoms/Label'
+import withCounter from '../../hocs/withCounter'
+import Pane from '../atoms/Pane'
 
-export default enhancer(props => {
+export default withCounter(props => {
   return (
-    <div>
-      <h1>Counter</h1>
-      <Label text={props.value.toString()} />
-      <button onClick={() => props.actions.increment()}>+</button>
-    </div>
+    <Pane>
+      <button onClick={() => props.actions.increment()}>+1</button>
+      <span>{props.value}</span>
+    </Pane>
   )
 })
