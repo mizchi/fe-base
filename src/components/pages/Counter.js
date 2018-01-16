@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react'
-import withCounter from '../../hocs/withCounter'
-import Pane from '../atoms/Pane'
+import withCounter from '~/hocs/withCounter'
+import Pane from '~/components/atoms/Pane'
 
 export default withCounter(props => {
   return (

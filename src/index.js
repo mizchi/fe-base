@@ -2,7 +2,7 @@
 import 'babel-polyfill'
 import * as React from 'react'
 import ReactDOM from 'react-dom'
-import App from './components/App'
+import App from '~/components/App'
 import { injectGlobal } from 'styled-components'
 
 injectGlobal`

@@ -3,8 +3,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import createStore from '../store/createStore'
-import Routes from '../components/Routes'
+import createStore from '~/store/createStore'
+import Routes from '~/components/Routes'
 import Header from './organisms/Header'
 import Menu from './organisms/Menu'
 
@@ -58,4 +58,3 @@ export const Layout$Header = styled.div`
 export const Layout$Content = styled.div`
   grid-area: content;
 `
-

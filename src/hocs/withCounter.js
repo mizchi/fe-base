@@ -2,8 +2,8 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { compose, lifecycle, pure, type HOC } from 'recompose'
-import * as CounterActions from '../reducers/counter'
-import { type State as RootState } from '../reducers/index'
+import * as CounterActions from '~/reducers/counter'
+import { type State as RootState } from '~/reducers'
 
 type OuterProps = {}
 
