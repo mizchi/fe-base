@@ -51,7 +51,6 @@
     "@babel/preset-flow": "7.0.0-beta.36",
     "@babel/preset-react": "7.0.0-beta.36",
     "@babel/register": "7.0.0-beta.36",
-    "@mizchi/ava-helper": "^0.1.2",
     "@storybook/addon-actions": "^3.3.1",
     "@storybook/addon-links": "^3.3.1",
     "@storybook/addon-storyshots": "^3.3.1",

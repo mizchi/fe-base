@@ -6,7 +6,8 @@
       {
         "root": ["./src"],
         "alias": {
-          "~": "./src"
+          "~": "./src",
+          "test": "./test"
         }
       }
     ]

@@ -1,9 +1,9 @@
 /* @flow */
 import React from 'react'
-import { justSnapshot } from '@mizchi/ava-helper'
+import { snapshot } from 'test/helpers'
 
 export default function TestSample() {
   return <span>test-sample</span>
 }
 
-justSnapshot(<TestSample />)
+snapshot(<TestSample />)

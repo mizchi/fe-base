@@ -604,12 +604,6 @@
   dependencies:
     arrify "^1.0.1"
 
-"@mizchi/ava-helper@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@mizchi/ava-helper/-/ava-helper-0.1.2.tgz#941db431d877d5f75d35118cf830c0c638e13aff"
-  dependencies:
-    enzyme-to-json "^3.1.1"
-
 "@storybook/addon-actions@^3.3.1":
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-3.3.1.tgz#d282c276a12f3580670233054ab74bd1a50ef1ac"
