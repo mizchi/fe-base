@@ -1,6 +1,6 @@
 {
   "plugins": [
-    "transform-object-rest-spread",
+    "@babel/plugin-proposal-object-rest-spread",
     [
       "module-resolver",
       {
@@ -14,17 +14,25 @@
   ],
   "env": {
     "development": {
-      "presets": ["flow", "react", ["env", { "targets": { "chrome": 61 } }]]
+      "presets": [
+        "@babel/preset-flow",
+        "@babel/preset-react",
+        ["@babel/preset-env", { "targets": { "chrome": 61 } }]
+      ]
     },
     "test": {
-      "presets": ["flow", "react", ["env", { "targets": { "node": "8.5" } }]]
+      "presets": [
+        "@babel/preset-flow",
+        "@babel/preset-react",
+        ["@babel/preset-env", { "targets": { "node": "8.5" } }]
+      ]
     },
     "production": {
       "presets": [
-        "flow",
-        "react",
+        "@babel/preset-flow",
+        "@babel/preset-react",
         [
-          "env",
+          "@babel/preset-env",
           {
             "modules": false,
             "browsers": ["last 2 versions", "ie >= 11"]
