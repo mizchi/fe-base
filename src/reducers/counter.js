@@ -10,6 +10,12 @@ export function increment() {
   }
 }
 
+export async function incrementAsync() {
+  return {
+    type: INCREMENT
+  }
+}
+
 // Reducer
 export type Action = $Call<typeof increment>
 

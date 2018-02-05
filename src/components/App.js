@@ -2,29 +2,21 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
-import createStore from '~/store/createStore'
-import Routes from '~/components/Routes'
 import Header from './organisms/Header'
 import Menu from './organisms/Menu'
 
-export default function App() {
-  const store = createStore()
+export default function App(props: { store: any, children: any }) {
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Layout>
-          <Layout$Menu>
-            <Menu />
-          </Layout$Menu>
-          <Layout$Header>
-            <Header />
-          </Layout$Header>
-          <Layout$Content>
-            <Routes />
-          </Layout$Content>
-        </Layout>
-      </BrowserRouter>
+    <Provider store={props.store}>
+      <Layout>
+        <Layout$Menu>
+          <Menu />
+        </Layout$Menu>
+        <Layout$Header>
+          <Header />
+        </Layout$Header>
+        <Layout$Content>{props.children}</Layout$Content>
+      </Layout>
     </Provider>
   )
 }

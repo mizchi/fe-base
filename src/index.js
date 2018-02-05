@@ -1,9 +1,7 @@
 /* @flow */
 import 'babel-polyfill'
-import * as React from 'react'
-import ReactDOM from 'react-dom'
-import App from '~/components/App'
 import { injectGlobal } from 'styled-components'
+import { start } from './router'
 
 injectGlobal`
   html, body, main {
@@ -29,7 +27,4 @@ injectGlobal`
   }
 `
 
-const el = document.querySelector('main')
-if (el) {
-  ReactDOM.render(<App />, el)
-}
+start()
