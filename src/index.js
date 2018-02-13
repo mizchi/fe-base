@@ -28,3 +28,5 @@ injectGlobal`
 `
 
 start()
+const x = 1
+

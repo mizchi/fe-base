@@ -6,4 +6,4 @@ export default function TestSample() {
   return <span>test-sample</span>
 }
 
-snapshot(<TestSample />)
+snapshot('sample', <TestSample />)
