@@ -9,7 +9,7 @@
 * react-redux
 * react-router
 * recompose
-* webpack
+* webpack v4
 * prettier
 * ava
 * netlify
@@ -29,6 +29,11 @@ npm i -g netlify-cli
 netlify create
 yarn deploy
 ```
+
+## TODO
+
+* HMR is broken by webpack v4 & react-hot-loader
+* Storybook is broken
 
 ## License
 
