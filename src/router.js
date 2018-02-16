@@ -5,6 +5,8 @@ import UniversalRouter from 'universal-router'
 import routes from './routes'
 import createHistory from 'history/createBrowserHistory'
 import createStore from './store/createStore'
+import { setConfig } from 'react-hot-loader'
+setConfig({ logLevel: 'debug' })
 
 const router = new UniversalRouter(routes, {
   context: {
@@ -13,14 +15,14 @@ const router = new UniversalRouter(routes, {
 })
 
 const history = createHistory()
-let el // root element
+let rootElement // root element
 
 /* Scroll position controller */
 const scrollPositionsHistory: { [string]: number } = {}
 const updateScrollPosition = (location: { key: string }) => {
   scrollPositionsHistory[location.key] = {
-    scrollX: window.pageXOffset,
-    scrollY: window.pageYOffset
+    scrollX: (window: any).pageXOffset,
+    scrollY: (window: any).pageYOffset
   }
 }
 
@@ -31,10 +33,10 @@ const deletePosition = (location: { key: string }) => {
 const restoreScollPosition = (location: { hash: string }) => {
   let scrollX = 0
   let scrollY = 0
-  const pos = scrollPositionsHistory[location.key]
+  const pos = scrollPositionsHistory[(location: any).key]
   if (pos) {
-    scrollX = pos.scrollX
-    scrollY = pos.scrollY
+    scrollX = (pos: any).scrollX
+    scrollY = (pos: any).scrollY
   } else {
     const targetHash = location.hash.substr(1)
     if (targetHash) {
@@ -77,11 +79,11 @@ const onLocationChange = async (location, action): Promise<void> => {
       deletePosition(location)
     }
 
-    if (React.isValidElement(route)) {
+    if (rootElement && React.isValidElement(route)) {
       // For HMR
       // https://github.com/nozzle/react-static/issues/144#issuecomment-348270365
-      const render = !!module.hot ? ReactDOM.render : ReactDOM.hydrate
-      render(route, el, () => {
+      // const render = !!module.hot ? ReactDOM.render : ReactDOM.hydrate
+      ReactDOM.render(route, rootElement, () => {
         switchOffScrollRestorationOnce()
         restoreScollPosition(history.location)
       })
@@ -95,25 +97,18 @@ const onLocationChange = async (location, action): Promise<void> => {
 }
 
 export const start = () => {
-  el = document.querySelector('.root')
+  rootElement = document.querySelector('.root')
   history.listen(onLocationChange)
   onLocationChange(history.location)
 }
 
-// HMR
-if (module.hot) {
-  module.hot.accept('./routes', () => {
-    onLocationChange(history.location)
-  })
-}
-
 /* Link */
 
-function isLeftClickEvent(event: SytheticEvent<>) {
+function isLeftClickEvent(event: SyntheticEvent<>) {
   return event.button === 0
 }
 
-function isModifiedEvent(event: SytheticEvent<>) {
+function isModifiedEvent(event: SyntheticEvent<>) {
   return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey)
 }
 

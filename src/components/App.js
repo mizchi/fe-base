@@ -4,8 +4,10 @@ import styled from 'styled-components'
 import { Provider } from 'react-redux'
 import Header from './organisms/Header'
 import Menu from './organisms/Menu'
+import { hot } from 'react-hot-loader'
 
-export default function App(props: { store: any, children: any }) {
+// TODO: HMR does not work
+export default hot(module)((props: { store: any, children: any }) => {
   return (
     <Provider store={props.store}>
       <Layout>
@@ -19,7 +21,7 @@ export default function App(props: { store: any, children: any }) {
       </Layout>
     </Provider>
   )
-}
+})
 
 // prettier-ignore
 export const Layout = styled.div`
