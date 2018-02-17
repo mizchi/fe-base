@@ -10,6 +10,7 @@
     "lint": "eslint src",
     "test": "NODE_ENV=test jest",
     "test:watch": "yarn test --watch",
+    "glow": "glow --watch",
     "test:cov": "yarn test --collectCoverage",
     "watch": "webpack-dev-server --hot --mode development",
     "build:dev": "webpack --mode development",

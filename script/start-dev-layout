@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+# for tmux user
+tmux split-pane -h \; send-keys "yarn glow" Enter
+tmux split-pane -v \; send-keys "yarn test:watch" Enter
+tmux split-pane -v \; send-keys "yarn watch" Enter
