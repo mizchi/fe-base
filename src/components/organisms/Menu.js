@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react'
-import { Link } from '~/router'
+import Link from '~/components/atoms/Link'
 import Pane from '~/components/atoms/Pane'
 
 export default function Menu() {

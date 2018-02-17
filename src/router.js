@@ -5,8 +5,7 @@ import UniversalRouter from 'universal-router'
 import routes from './routes'
 import createHistory from 'history/createBrowserHistory'
 import createStore from './store/createStore'
-import { setConfig } from 'react-hot-loader'
-setConfig({ logLevel: 'debug' })
+import * as scrollHelpers from './helpers/scrollHelpers'
 
 const router = new UniversalRouter(routes, {
   context: {
@@ -14,78 +13,39 @@ const router = new UniversalRouter(routes, {
   }
 })
 
-const history = createHistory()
-let rootElement // root element
+export default router
 
-/* Scroll position controller */
-const scrollPositionsHistory: { [string]: number } = {}
-const updateScrollPosition = (location: { key: string }) => {
-  scrollPositionsHistory[location.key] = {
-    scrollX: (window: any).pageXOffset,
-    scrollY: (window: any).pageYOffset
-  }
-}
+export const history = createHistory()
 
-const deletePosition = (location: { key: string }) => {
-  delete scrollPositionsHistory[location.key]
-}
-
-const restoreScollPosition = (location: { hash: string }) => {
-  let scrollX = 0
-  let scrollY = 0
-  const pos = scrollPositionsHistory[(location: any).key]
-  if (pos) {
-    scrollX = (pos: any).scrollX
-    scrollY = (pos: any).scrollY
-  } else {
-    const targetHash = location.hash.substr(1)
-    if (targetHash) {
-      const target = document.getElementById(targetHash)
-      if (target) {
-        scrollY = window.pageYOffset + target.getBoundingClientRect().top
-      }
-    }
-  }
-  // Restore the scroll position if it was saved into the state
-  // or scroll to the given #hash anchor
-  // or scroll to top of the page
-  window.scrollTo(scrollX, scrollY)
-}
-
-let _off = false
-const switchOffScrollRestorationOnce = () => {
-  if (_off) {
-    return
-  }
-  // Switch off the native scroll restoration behavior and handle it manually
-  // https://developers.google.com/web/updates/2015/09/history-api-scroll-restoration
-  if (window.history && 'scrollRestoration' in window.history) {
-    window.history.scrollRestoration = 'manual'
-  }
-  _off = true
-  return
-}
+let _rootElement // root element
+const getRootElement = () =>
+  _rootElement || (_rootElement = document.querySelector('.root'))
 
 const onLocationChange = async (location, action): Promise<void> => {
-  updateScrollPosition(location)
+  scrollHelpers.updateScrollPosition(location)
   try {
-    const route = await router.resolve(location)
-    if (route.redirect) {
-      history.replace(route.redirect)
+    const result = await router.resolve(location)
+    if (result.redirect) {
+      history.replace(result.redirect)
       return
     }
 
     if (action === 'PUSH') {
-      deletePosition(location)
+      scrollHelpers.deletePosition(location)
     }
 
-    if (rootElement && React.isValidElement(route)) {
+    if (result.title && typeof document !== 'undefined') {
+      document.title = result.title
+    }
+
+    const el = getRootElement()
+    if (el && React.isValidElement(result.component)) {
       // For HMR
       // https://github.com/nozzle/react-static/issues/144#issuecomment-348270365
       // const render = !!module.hot ? ReactDOM.render : ReactDOM.hydrate
-      ReactDOM.render(route, rootElement, () => {
-        switchOffScrollRestorationOnce()
-        restoreScollPosition(history.location)
+      ReactDOM.render(result.component, el, () => {
+        scrollHelpers.switchOffScrollRestorationOnce()
+        scrollHelpers.restoreScollPosition(history.location)
       })
     } else {
       // not react
@@ -96,56 +56,7 @@ const onLocationChange = async (location, action): Promise<void> => {
   }
 }
 
-export const start = () => {
-  rootElement = document.querySelector('.root')
+export const startHistory = () => {
   history.listen(onLocationChange)
   onLocationChange(history.location)
-}
-
-/* Link */
-
-function isLeftClickEvent(event: SyntheticEvent<>) {
-  return event.button === 0
-}
-
-function isModifiedEvent(event: SyntheticEvent<>) {
-  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey)
-}
-
-const handleClick = ({ onClick, to }) => event => {
-  if (onClick) {
-    onClick(event)
-  }
-
-  if (isModifiedEvent(event) || !isLeftClickEvent(event)) {
-    return
-  }
-
-  if (event.defaultPrevented === true) {
-    return
-  }
-
-  event.preventDefault()
-  if (
-    to !== history.createHref(history.location).replace(location.origin, '')
-  ) {
-    history.push(to)
-  } else {
-    // console.info('reject transition by same url')
-  }
-}
-
-type Props = {
-  to: string,
-  children: any,
-  onClick?: Function
-}
-
-export function Link(props: Props) {
-  const { to, children, onClick, ...others } = props
-  return (
-    <a href={to} {...others} onClick={handleClick({ onClick, to })}>
-      {children}
-    </a>
-  )
 }

@@ -1,7 +1,7 @@
 /* @flow */
 import 'babel-polyfill'
 import { injectGlobal } from 'styled-components'
-import { start } from './router'
+import { startHistory } from './router'
 
 injectGlobal`
   html, body, main {
@@ -27,6 +27,4 @@ injectGlobal`
   }
 `
 
-start()
-const x = 1
-
+startHistory()

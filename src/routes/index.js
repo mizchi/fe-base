@@ -8,41 +8,65 @@ import Counter from '~/components/pages/Counter'
 import * as CounterActions from '~/reducers/counter'
 
 type Context = {
-  store: any
+  store: {
+    dispatch: Function
+  }
 }
 
-export default [
+type RouteAction =
+  | {
+      title: string,
+      component: any
+    }
+  | {
+      redirect: string
+    }
+  | void
+
+const routes: Array<{
+  path: string,
+  action: Context => RouteAction | Promise<RouteAction>
+}> = [
   {
     path: '',
-    action: (context: Context) => {
-      return (
-        <App store={context.store}>
-          <Home />
-        </App>
-      )
+    action: ctx => {
+      return {
+        title: 'Home',
+        component: (
+          <App store={ctx.store}>
+            <Home />
+          </App>
+        )
+      }
     }
   },
   {
     path: '/about',
-    action: (context: Context) => {
-      return (
-        <App store={context.store}>
-          <About />
-        </App>
-      )
+    action: ctx => {
+      return {
+        title: 'About',
+        component: (
+          <App store={ctx.store}>
+            <About />
+          </App>
+        )
+      }
     }
   },
   {
     path: '/counter',
-    action: async (context: Context) => {
-      const dispatch = context.store.dispatch
+    action: async ctx => {
+      const dispatch = ctx.store.dispatch
       dispatch(CounterActions.increment()) // sync
       await dispatch(CounterActions.incrementAsync()) // async
-      return (
-        <App store={context.store}>
-          <Counter />
-        </App>
-      )
+      return {
+        title: 'Counter',
+        component: (
+          <App store={ctx.store}>
+            <Counter />
+          </App>
+        )
+      }
     }
   },
   {
@@ -52,23 +76,33 @@ export default [
         path: '/a',
         action: () => {
           console.log('a')
+          return {
+            title: 'a',
+            component: <h1>a</h1>
+          }
         }
       },
       {
         path: '/b',
-        action: () => {
+        action: _ctx => {
           console.log('b')
+          return {
+            title: 'b',
+            component: <h1>b</h1>
+          }
         }
       },
       {
         path: '/c',
-        action: () => {
+        action: _ctx => {
           return { redirect: '/nested/a' }
         }
       }
     ],
-    action: () => {
+    action: _ctx => {
       console.log('nested action')
     }
   }
 ]
+
+export default routes
