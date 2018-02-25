@@ -4,7 +4,9 @@
   "author": "mizchi <miz404@gmail.com>",
   "license": "MIT",
   "jest": {
-    "testMatch": ["**/__tests__/*.test.js"]
+    "testMatch": [
+      "**/__tests__/*.test.js"
+    ]
   },
   "scripts": {
     "lint": "eslint src",
