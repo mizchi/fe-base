@@ -4,14 +4,14 @@
 
 ## Stack
 
-* babel/flowtype
+* babel + flowtype
 * react
 * react-redux
 * react-router
 * recompose
-* webpack v4
+* webpack
 * prettier
-* ava
+* jest
 * netlify
 
 ## Start to develop
@@ -33,7 +33,6 @@ yarn deploy
 ## TODO
 
 * HMR is broken by webpack v4 & react-hot-loader
-* Storybook is broken
 
 ## License
 
